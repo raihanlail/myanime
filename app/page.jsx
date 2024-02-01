@@ -2,16 +2,18 @@ import Link from "next/link";
 import AnimeList from "./components/AnimeList";
 import Header from "./components/AnimeList/header";
 import { getAnimeResponse, getNestedAnimeResponse } from "./libs/api-libs";
+import Carousel from "./components/Carousel";
 
 const Page = async () => {
-  const topAnime = await getAnimeResponse("top/anime", "limit=8");
+  const topAnime = await getAnimeResponse("top/anime", "limit=10");
+  
   let recommendation = await getNestedAnimeResponse(
     "recommendations/anime",
     "entry"
   );
   const generateNumberMin = () => {
-    let firstNum = Math.floor(Math.random() * recommendation.length );
-    let secondNum = firstNum + 8;
+    let firstNum = Math.floor(Math.random() * recommendation.length  );
+    let secondNum = firstNum + 10;
     const ArrRandomNumb = [];
     ArrRandomNumb.push(firstNum);
     ArrRandomNumb.push(secondNum);
@@ -33,7 +35,7 @@ const Page = async () => {
         />
         <AnimeList api={topAnime} />
       </section>
-      <section className="pt-6">
+      <section className="pt-12">
         <h1 className="text-2xl font-bold text-color-primary px-4 py-2">
           Recommendation
         </h1>
