@@ -23,8 +23,8 @@ const InputSearch = () => {
 
     };
     return (
-        <div className="relative">
-            <input placeholder="search..." className="p-2 rounded w-full" ref={searchRef} onKeyPress={handleKeyPress}></input>
+        <div className="relative border border-black">
+            <input placeholder="search..." className="p-2 rounded-sm w-full" ref={searchRef} onKeyPress={handleKeyPress}></input>
             <button className="absolute top-2 end-2" onClick={handleSearch}>
             
             </button>

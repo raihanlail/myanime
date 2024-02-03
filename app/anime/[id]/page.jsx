@@ -6,10 +6,9 @@ import CharacterList from "@/app/components/CharacterList";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
+  const animeFull = await getAnimeResponse(`anime/${id}/full`);
   const character = await getAnimeResponse(`anime/${id}/characters`);
-  
-  
-  
+  const genre = await getAnimeResponse("genres/anime");
 
   let recommendation = await getNestedAnimeResponse(
     "recommendations/anime",
@@ -86,27 +85,43 @@ const Page = async ({ params: { id } }) => {
             {anime.data.synopsis}
           </p>
         </div>
-        
 
         <div>
           <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
         </div>
         <div className="flex flex-row gap-4 text-sm px-10 font-extrabold">
-        <div className=" w-24 flex flex-col justify-center items-center rounded border bg-color-bright border-color-primary p-4">
-                  <h3>Genre:</h3>
-                  <p>{anime.data.genres.name}</p>
-                </div>
-                <div className="w-24  flex flex-col justify-center items-center rounded-lg border  bg-color-bright border-color-primary p-2">
-                  <h3>Studio:</h3>
-                  <p>{anime.data.studios.name}</p>
-                </div>
+          <div className="w-24  flex flex-col justify-center items-center rounded border bg-color-bright border-color-primary p-4">
+            <h3>Genre:</h3>
 
+            {anime.data.genres.map((genre, index) => {
+              return (
+                <div className="flex items-center text-xs">
+                  <p key={index}>{genre.name},</p>
+                  
+                </div>
+              );
+            })}
+          </div>
+          <div className="w-24 max-w-72  flex flex-col justify-center items-center rounded-lg border  bg-color-bright border-color-primary p-2">
+            <h3>Studio:</h3>
+            {anime.data.studios.map((studio, index) => {
+              return (
+                <div className="flex  items-center text-xs">
+                  <p key={index}>{studio.name}</p>
+                  
+                </div>
+              );
+            })}
+
+            
+          </div>
+         
         </div>
         <section className="pt-8 px-8">
           <h1 className="text-2xl font-bold text-color-primary px-4 py-2">
             Characters
           </h1>
-          <CharacterList api={character}/>
+          <CharacterList api={character} />
         </section>
         <section className="pt-8 px-8">
           <h1 className="text-2xl font-bold text-color-primary px-4 py-2">

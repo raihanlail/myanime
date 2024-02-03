@@ -1,37 +1,55 @@
-"use client"
-
 import { getAnimeResponse } from "@/app/libs/api-libs";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 
+const Page = async ({ params: { id } }) => {
+  const char = await getAnimeResponse(`characters/${id}`);
+  const charFull = await getAnimeResponse(`characters/${id}/full`);
+  const anime = await getAnimeResponse(`characters/${id}/anime`);
+  const va = await getAnimeResponse(`characters/${id}/voices`);
+  console.log(charFull);
 
-const Page = ( { params: {id} } ) => {
-    const [response, setResponse] = useState([])
+  return (
+    <div className="text-color-primary flex flex-nowrap md:flex-wrap flex-col md:flex-row">
+      <Image
+        src={char.data.images.webp.image_url}
+        width={1000}
+        height={1000}
+        className="p-4 w-80 items-center  h-100 z-10 rounded-sm border border-black"
+      ></Image>
+      <div className="flex flex-col">
+        <h1 className="text-3xl p-4 font-bold">
+          {char.data.name} / {char.data.name_kanji}
+        </h1>
+        <p className="p-4 text-justify">{char.data.about}</p>
+        <div className="p-4">
+          <p>Voice Actors:</p>
 
-    const getDatas = async( params )=> {
-        const char = await getAnimeResponse(`anime/${id}/characters`, `q=${id}`);
-        const result = char.data.map(datas => {
-            return{
-                name: datas.results.character.name
-                
-
-            }
-        } )
-        setResponse(result)
-    }
-    
-    useEffect(()=> {
-        getDatas()
-    }, [])
-    console.log(response)
-  
-    
-    
-    return(
-        <div className="text-color-primary">
-
-            <h1></h1>
+          {va.data.map((voice, index) => {
+            return (
+              <li key={index}>
+                {" "}
+                {voice.person.name} ({voice.language})
+              </li>
+            );
+          })}
         </div>
-    )
-}
+        <div className="p-4">
+          <p>Animes and Roles</p>
 
-export default Page
+          {charFull.data.anime.map((anime, index) => {
+            return (
+              <a href={`/anime/${anime.anime.mal_id}`}>
+                <li key={index}>
+                  {" "}
+                  {anime.anime.title} ({anime.role})
+                </li>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Page;

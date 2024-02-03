@@ -13,7 +13,8 @@ const Page = async () => {
   );
   const generateNumberMin = () => {
     let firstNum = Math.floor(Math.random() * recommendation.length  );
-    let secondNum = firstNum + 10;
+    let secondNum = firstNum + 5
+    ;
     const ArrRandomNumb = [];
     ArrRandomNumb.push(firstNum);
     ArrRandomNumb.push(secondNum);
@@ -25,7 +26,7 @@ const Page = async () => {
   recommendation = { data: recommendation.slice(randomArr[0], randomArr[1]) };
 
   return (
-    <div className="pb-4">
+    <div className="pb-4 pt-4">
       <section>
         <Header
           className="text-color-primary"
