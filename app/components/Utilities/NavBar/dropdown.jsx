@@ -15,7 +15,7 @@ const DropdownButton = () => {
 
   return (
     <div>
-      <div className="dropdown text-color-primary px-4">
+      <div className="dropdown text-color-primary md:px-4">
         <button onClick={toggleButton}>
           <div tabIndex={0} role="button" className="btn m-1 ">
             Genres

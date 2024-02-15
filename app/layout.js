@@ -1,8 +1,12 @@
-import { Inter } from 'next/font/google'
+
 import './globals.css'
 import Navbar from './components/Utilities/NavBar'
+import { DM_Sans } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const dmSans = DM_Sans({ subsets: ["latin"] });
+
+
+
 
 export const metadata = {
   title: 'MyAnime',
@@ -13,8 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       
-      <body className={`${inter.className}, bg-gray-900`}>
+      <body className={`${dmSans.className}, bg-color-dark`}>
       <Navbar />
+      
         {children}
         </body>
     </html>

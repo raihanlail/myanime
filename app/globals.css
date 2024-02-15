@@ -24,13 +24,13 @@ img {
 
 }
 img:hover{
-  scale: 100%;
+  scale: 103%;
 }
 
 .loading {
   width: 160px;
   height: 160px;
-  --c:#980a0a 98%,#0000;
+  --c:##ffffff 98%,#0000;
   background:
     radial-gradient(50% 70% at 50% 120%, var(--c)) top,
     radial-gradient(70% 50% at -20% 50%, var(--c)) right,

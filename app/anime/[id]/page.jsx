@@ -10,12 +10,14 @@ const Page = async ({ params: { id } }) => {
   const character = await getAnimeResponse(`anime/${id}/characters`);
   const genre = await getAnimeResponse("genres/anime");
 
+  const text = anime.data.synopsis;
+
   let recommendation = await getNestedAnimeResponse(
     "recommendations/anime",
     "entry"
   );
   const generateNumberMin = () => {
-    let firstNum = Math.floor(Math.random() * recommendation.length);
+    let firstNum = Math.floor(Math.random() * recommendation.length + 4);
     let secondNum = firstNum + 4;
     const ArrRandomNumb = [];
     ArrRandomNumb.push(firstNum);
@@ -28,7 +30,7 @@ const Page = async ({ params: { id } }) => {
 
   return (
     <>
-      <div className="relative h-96 bg-gradient-to-t from-gray-900  via-gray-500 to-gray-900 bg-cover bg-center  ">
+      <div className="relative h-[90vh] bg-gradient-to-t from-color-dark  via-gray-700 to-gray-700 bg-cover bg-center  ">
         <Image
           src={anime.data.images.webp.large_image_url}
           width={1200}
@@ -37,19 +39,19 @@ const Page = async ({ params: { id } }) => {
           className="w-full h-full object-cover mix-blend-overlay overflow-hidden absolute"
         ></Image>
         <div
-          className=" pt-64  md:pt-80
+          className=" pt-64  md:pt-48
        "
         >
           <div className=" pt-4 px-12 opacity-100 flex flex-row">
             <Image
-              src={anime.data.images.webp.image_url}
+              src={anime.data.images.webp.large_image_url}
               width={100}
               height={100}
               alt={anime.data.images.jpg.image_url}
               className="w-40  h-60 z-10"
             ></Image>
             <div className="flex flex-wrap  md:flex-col">
-              <h1 className=" text-color-primary font-extrabold text-2xl md:text-4xl opacity-100 px-4">
+              <h1 className=" text-color-primary font-bold text-2xl md:text-4xl opacity-100 px-4">
                 {anime.data.title} - {anime.data.year}
               </h1>
               <div className="pt-4 px-4 flex flex-wrap md:flex-row text-xs text-color-dark font-extrabold gap-8 md:gap-4 overflow-x-auto">
@@ -82,7 +84,7 @@ const Page = async ({ params: { id } }) => {
         </div>
         <div className="pt-6 px-4 flex flex-wrap sm:flex-nowrap text-color-primary gap-2">
           <p className="text-justify text-md px-8 pb-10">
-            {anime.data.synopsis}
+            {text}
           </p>
         </div>
 
@@ -90,9 +92,9 @@ const Page = async ({ params: { id } }) => {
           <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
         </div>
         <div className="flex flex-row gap-4 text-sm px-10 font-extrabold">
+
           <div className="w-24  flex flex-col justify-center items-center rounded border bg-color-bright border-color-primary p-4">
             <h3>Genre:</h3>
-
             {anime.data.genres.map((genre, index) => {
               return (
                 <div className="flex items-center text-xs">
@@ -123,8 +125,8 @@ const Page = async ({ params: { id } }) => {
           </h1>
           <CharacterList api={character} />
         </section>
-        <section className="pt-8 px-8">
-          <h1 className="text-2xl font-bold text-color-primary px-4 py-2">
+        <section className="pt-8 px-4">
+          <h1 className="text-2xl font-bold text-color-primary px-8 py-4">
             Recommended For You
           </h1>
           <AnimeList api={recommendation} />

@@ -3,6 +3,7 @@ import AnimeList from "./components/AnimeList";
 import Header from "./components/AnimeList/header";
 import { getAnimeResponse, getNestedAnimeResponse } from "./libs/api-libs";
 import Carousel from "./components/Carousel";
+import Hero from "./components/Utilities/hero";
 
 const Page = async () => {
   const topAnime = await getAnimeResponse("top/anime", "limit=10");
@@ -26,6 +27,10 @@ const Page = async () => {
   recommendation = { data: recommendation.slice(randomArr[0], randomArr[1]) };
 
   return (
+    <div>
+      <Hero/>
+
+
     <div className="pb-4 pt-4">
       <section>
         <Header
@@ -37,11 +42,12 @@ const Page = async () => {
         <AnimeList api={topAnime} />
       </section>
       <section className="pt-12">
-        <h1 className="text-2xl font-bold text-color-primary px-4 py-2">
+        <h1 className="text-2xl font-bold text-color-primary px-10 py-6">
           Recommendation
         </h1>
         <AnimeList api={recommendation} />
       </section>
+    </div>
     </div>
   );
 };
