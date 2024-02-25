@@ -23,9 +23,7 @@ img {
   -o-transition: .3s ease all;
 
 }
-img:hover{
-  scale: 103%;
-}
+
 
 .loading {
   width: 160px;

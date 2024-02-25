@@ -6,15 +6,15 @@ import Carousel from "./components/Carousel";
 import Hero from "./components/Utilities/hero";
 
 const Page = async () => {
-  const topAnime = await getAnimeResponse("top/anime", "limit=10");
+  const topAnime = await getAnimeResponse("top/anime", "limit=14");
   
   let recommendation = await getNestedAnimeResponse(
     "recommendations/anime",
     "entry"
   );
   const generateNumberMin = () => {
-    let firstNum = Math.floor(Math.random() * recommendation.length  );
-    let secondNum = firstNum + 5
+    let firstNum = Math.floor(Math.random() * recommendation.length + 7 );
+    let secondNum = firstNum + 7
     ;
     const ArrRandomNumb = [];
     ArrRandomNumb.push(firstNum);
@@ -35,7 +35,7 @@ const Page = async () => {
       <section>
         <Header
           className="text-color-primary"
-          title="Most Popular"
+          title="Most Popular 🔥🔥"
           linkTitle="See All"
           linkHref="/populer"
         />

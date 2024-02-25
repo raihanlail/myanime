@@ -17,8 +17,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       
-      <body className={`${dmSans.className}, bg-color-dark`}>
-      <Navbar />
+      <body className={`${dmSans.className}, bg-[#252A37]`}>
+      
       
         {children}
         </body>

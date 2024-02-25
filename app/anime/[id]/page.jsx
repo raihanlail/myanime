@@ -3,6 +3,10 @@ import Image from "next/image";
 import VideoPlayer from "@/app/components/Utilities/VideoPlayer";
 import AnimeList from "@/app/components/AnimeList";
 import CharacterList from "@/app/components/CharacterList";
+import Link from "next/link";
+import DropdownButton from "@/app/components/Utilities/NavBar/dropdown";
+import InputSearch from "@/app/components/Utilities/NavBar/inputSearch";
+
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
@@ -17,8 +21,8 @@ const Page = async ({ params: { id } }) => {
     "entry"
   );
   const generateNumberMin = () => {
-    let firstNum = Math.floor(Math.random() * recommendation.length + 4);
-    let secondNum = firstNum + 4;
+    let firstNum = Math.floor(Math.random() * recommendation.length + 6);
+    let secondNum = firstNum + 6;
     const ArrRandomNumb = [];
     ArrRandomNumb.push(firstNum);
     ArrRandomNumb.push(secondNum);
@@ -30,16 +34,34 @@ const Page = async ({ params: { id } }) => {
 
   return (
     <>
-      <div className="relative h-[90vh] bg-gradient-to-t from-color-dark  via-gray-700 to-gray-700 bg-cover bg-center  ">
+    <div>
+
+      <div className="relative h-[90vh] bg-gradient-to-t from-color-dark to-gray-900 bg-cover bg-center  ">
+      
         <Image
           src={anime.data.images.webp.large_image_url}
           width={1200}
           height={1200}
           alt={anime.data.images.jpg.image_url}
-          className="w-full h-full object-cover mix-blend-overlay overflow-hidden absolute"
+          className="w-full h-full object-cover mix-blend-overlay overflow-hidden absolute hover:scale-1"
         ></Image>
+        <header className=" ">
+        <div className="flex flex-col md:flex-row justify-between p-4">
+          <Link
+            href="/"
+            className="text-2xl hover:scale-105 transition-all font-bold text-color-primary md:px-4 "
+          >
+            
+            MYANIME⭐
+          </Link>
+
+         
+
+          <InputSearch />
+        </div>
+      </header>
         <div
-          className=" pt-64  md:pt-48
+          className=" pt-64  md:pt-24
        "
         >
           <div className=" pt-4 px-12 opacity-100 flex flex-row">
@@ -132,6 +154,7 @@ const Page = async ({ params: { id } }) => {
           <AnimeList api={recommendation} />
         </section>
       </div>
+    </div>
     </>
   );
 };

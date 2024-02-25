@@ -1,3 +1,4 @@
+import Navbar from "@/app/components/Utilities/NavBar";
 import { getAnimeResponse } from "@/app/libs/api-libs";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +12,15 @@ const Page = async ({ params: { id } }) => {
   console.log(charFull);
 
   return (
+    <div>
+      <Navbar/>
+
     <div className="text-color-primary flex flex-nowrap md:flex-wrap flex-col md:flex-row">
       <Image
         src={char.data.images.webp.image_url}
         width={1000}
         height={1000}
-        className="p-4 w-80 items-center  h-100 z-10 rounded-sm border border-black"
+        className="p-4 w-80 items-center  h-100 z-10 rounded-sm "
       ></Image>
       <div className="flex flex-col">
         <h1 className="text-3xl p-4 font-bold">
@@ -70,6 +74,7 @@ const Page = async ({ params: { id } }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

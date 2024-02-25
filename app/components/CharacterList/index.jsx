@@ -9,7 +9,7 @@ const CharacterList = ({api}) => {
                 return (
                     <Link href={`/characterDetail/${char.character.mal_id}`} key={index} className="cursor-pointer hover:scale-105 shadow-xl text-color-primary hover:text-color-bright  transition-all">
         
-                    <Image src={image} width={350} height={350} className="w-full max-h-64 object-cover rounded-sm" />
+                    <Image src={image} width={350} alt='charimage' height={350} className="w-full max-h-64 object-cover" />
                     <h3 className="font-bold text-sm  ">{title}</h3>
                    
                     </Link>
