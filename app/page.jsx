@@ -43,7 +43,7 @@ const Page = async () => {
       </section>
       <section className="pt-12">
         <h1 className="text-2xl font-bold text-color-primary px-10 py-6">
-          Recommendation
+          Recommendation 
         </h1>
         <AnimeList api={recommendation} />
       </section>
